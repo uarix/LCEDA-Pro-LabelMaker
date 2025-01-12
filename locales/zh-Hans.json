@@ -1,4 +1,6 @@
 {
+	"Create Label": "创建丝印标签",
 	"About": "关于",
-	"EasyEDA extension SDK v": "嘉立创EDA 扩展 SDK v${1}"
+	"About Content": "为你的PCB创建独特的反向丝印标签\nCoding with ❤ by Quarix",
+	"About Version": "Label Maker插件版本 v${1}"
 }

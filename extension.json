@@ -1,14 +1,14 @@
 {
 	"name": "pro-api-sdk",
-	"uuid": "",
-	"displayName": "PRO API SDK",
-	"description": "嘉立创EDA & EasyEDA 专业版扩展 API 开发工具",
+	"uuid": "c698ae03503a4c4589337df549524f1e",
+	"displayName": "Label Maker",
+	"description": "为你的PCB创建独特的反向丝印标签",
 	"version": "1.0.0",
-	"publisher": "JLCEDA <support@lceda.cn>",
+	"publisher": "Quarix <HiQuarix@Gmail.com>",
 	"engines": {
 		"eda": "^2.2.32"
 	},
-	"license": "Apache-2.0",
+	"license": "CC BY-NC-SA 4.0",
 	"repository": {
 		"type": "extension-store",
 		"url": ""
@@ -18,46 +18,25 @@
 	"images": {
 		"logo": "./images/logo.png"
 	},
-	"homepage": "https://pro.lceda.cn",
-	"bugs": "https://lceda.cn/page/feedback?originPage=other",
+	"homepage": "https://github.com/uarix/LCEDA-Pro-LabelMaker",
+	"bugs": "https://github.com/uarix/LCEDA-Pro-LabelMaker/issues",
 	"activationEvents": {},
 	"entry": "./dist/index",
 	"dependentExtensions": {},
 	"headerMenus": {
-		"home": [
-			{
-				"id": "API SDK",
-				"title": "API SDK",
-				"menuItems": [
-					{
-						"id": "About",
-						"title": "关于...",
-						"registerFn": "about"
-					}
-				]
-			}
-		],
-		"sch": [
-			{
-				"id": "API SDK",
-				"title": "API SDK",
-				"menuItems": [
-					{
-						"id": "About",
-						"title": "关于...",
-						"registerFn": "about"
-					}
-				]
-			}
-		],
 		"pcb": [
 			{
-				"id": "API SDK",
-				"title": "API SDK",
+				"id": "label_maker",
+				"title": "Label Maker",
 				"menuItems": [
 					{
-						"id": "About",
-						"title": "关于...",
+						"id": "create_label",
+						"title": "Create Label",
+						"registerFn": "create_label"
+					},
+					{
+						"id": "about",
+						"title": "About",
 						"registerFn": "about"
 					}
 				]

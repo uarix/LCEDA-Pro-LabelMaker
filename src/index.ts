@@ -16,8 +16,14 @@ import * as extensionConfig from '../extension.json';
 export function activate(status?: 'onStartupFinished', arg?: string): void {}
 
 export function about(): void {
-	eda.sys_MessageBox.showInformationMessage(
-		eda.sys_I18n.text('EasyEDA extension SDK v', undefined, undefined, extensionConfig.version),
+	eda.sys_Dialog.showInformationMessage(
+		`${eda.sys_I18n.text('About Version', undefined, undefined, extensionConfig.version)}
+		\n
+		${eda.sys_I18n.text('About Content')}`,
 		eda.sys_I18n.text('About'),
 	);
+}
+
+export function create_label(): void {
+	eda.sys_Dialog.showInformationMessage('create_label', 'create_label1');
 }
