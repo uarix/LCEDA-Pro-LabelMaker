@@ -24,5 +24,8 @@
 		"alwaysStrict": true,
 		"isolatedModules": true
 	},
-	"include": ["./src/", "./node_modules/@jlceda/pro-api-types/"]
+	"include": ["./src/", "./node_modules/@jlceda/pro-api-types/"],
+	"exclude": [
+		"./src/interface/**/*" // 排除 React 界面相关代码
+	]
 }

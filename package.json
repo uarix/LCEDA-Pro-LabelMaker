@@ -11,6 +11,8 @@
 		"prettier:all": "prettier --write .",
 		"eslint:all": "eslint --ext .ts --fix .",
 		"fix": "npm run prettier:all && npm run eslint:all",
+		"build:interface": "tsc -p tsconfig.interface.json && vite build",
+		"prebuild": "npm run build:interface",
 		"build": "npm run compile && ts-node ./build/packaged.ts"
 	},
 	"devDependencies": {
@@ -18,8 +20,12 @@
 		"@microsoft/tsdoc": "^0.15.0",
 		"@trivago/prettier-plugin-sort-imports": "^4.3.0",
 		"@types/fs-extra": "^11.0.4",
+		"@types/react": "^19.0.7",
+		"@types/react-dom": "^19.0.3",
 		"@typescript-eslint/eslint-plugin": "^7.18.0",
 		"@typescript-eslint/parser": "^7.18.0",
+		"@vitejs/plugin-react": "^4.3.4",
+		"autoprefixer": "^10.4.20",
 		"esbuild": "^0.23.1",
 		"eslint": "^8.57.0",
 		"eslint-config-alloy": "^5.1.2",
@@ -29,10 +35,13 @@
 		"ignore": "^6.0.2",
 		"jszip": "^3.10.1",
 		"lint-staged": "^15.2.10",
+		"postcss": "^8.5.1",
 		"prettier": "^3.3.3",
 		"rimraf": "^6.0.1",
+		"tailwindcss": "^3.4.17",
 		"ts-node": "^10.9.2",
-		"typescript": "^5.6.2"
+		"typescript": "^5.7.3",
+		"vite": "^6.0.7"
 	},
 	"lint-staged": {
 		"*.ts": "eslint --cache --fix",
@@ -40,5 +49,10 @@
 	},
 	"engines": {
 		"node": ">=20.5.0"
+	},
+	"dependencies": {
+		"lucide-react": "^0.471.1",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
 	}
 }
