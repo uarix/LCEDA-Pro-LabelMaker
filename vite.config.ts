@@ -5,6 +5,9 @@ import { defineConfig } from 'vite';
 export default defineConfig({
 	base: '/iframe/',
 	plugins: [react()],
+	optimizeDeps: {
+		include: ['opentype.js'],
+	},
 	build: {
 		// 指定构建输出目录为 iframe
 		outDir: 'iframe',

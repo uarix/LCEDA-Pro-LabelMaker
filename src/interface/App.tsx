@@ -1,120 +1,98 @@
-import extensionConfig from '@extensionConfig';
-import { AlertCircle, CheckCircle2, Info } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import { Edit, Heart, Layers, Save } from 'lucide-react';
+import React, { useState } from 'react';
 
-import { ActionPanel } from './components/ActionPanel';
-import { EdaInfo } from './components/EdaInfo';
+import EditTab from './components/EditTab';
+import PresetTab from './components/PresetTab';
+import type { SilkPrintPreset } from './types/SilkPrintTypes';
 
-type StatusType = 'success' | 'error' | 'info';
-
-interface Status {
-	message: string;
-	type: StatusType;
-}
-
-function App() {
-	const [status, setStatus] = useState<Status | null>(null);
-
-	useEffect(() => {
-		try {
-			setStatus({
-				message: 'Successfully connected to EDA',
-				type: 'success',
-			});
-		} catch (error) {
-			setStatus({
-				message: 'Failed to connect to EDA: ' + (error as Error).message,
-				type: 'error',
-			});
-		}
-	}, []);
-
-	const handleAction = async (action: string) => {
-		try {
-			switch (action) {
-				case 'getVersion':
-					setStatus({
-						message: `Ext Version: ${extensionConfig.version}`,
-						type: 'success',
-					});
-					break;
-				case 'getAbout':
-					setStatus({
-						message: `Ext About: ${eda.sys_I18n.text('About Content')}`,
-						type: 'success',
-					});
-					eda.sys_Dialog.showInformationMessage(
-						`${eda.sys_I18n.text('About Version', undefined, undefined, extensionConfig.version)}
-						\n
-						${eda.sys_I18n.text('About Content')}`,
-						eda.sys_I18n.text('About'),
-					);
-					break;
-				case 'exit':
-					setStatus({
-						message: (await eda.sys_IFrame.closeIFrame('label_maker_' + extensionConfig.uuid)) ? 'Exit successful' : 'Exit failed',
-						type: 'error',
-					});
-					break;
-				default:
-					setStatus({
-						message: `Unknown action: ${action}`,
-						type: 'error',
-					});
-			}
-		} catch (error) {
-			setStatus({
-				message: `Error executing ${action}: ${(error as Error).message}`,
-				type: 'error',
-			});
-		}
-	};
-
-	const StatusIcon = {
-		success: <CheckCircle2 className="w-5 h-5 text-green-500" />,
-		error: <AlertCircle className="w-5 h-5 text-red-500" />,
-		info: <Info className="w-5 h-5 text-blue-500" />,
+const App: React.FC = () => {
+	const [activeTab, setActiveTab] = useState<'edit' | 'preset'>('edit');
+	const [currentEditPreset, setCurrentEditPreset] = useState<SilkPrintPreset | null>(null);
+	const handleEditPreset = (preset: SilkPrintPreset) => {
+		setCurrentEditPreset(preset);
+		setActiveTab('edit');
 	};
 
 	return (
-		<div className="min-h-screen bg-gray-50 py-8 px-4">
-			<div className="max-w-3xl mx-auto space-y-8">
+		<div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 px-4 selection:bg-blue-100">
+			<div className="max-w-4xl mx-auto space-y-6">
+				{/* 标题区域 */}
 				<header className="text-center">
-					<h1 className="text-3xl font-bold text-gray-900 mb-2">EDA Plugin Test Interface</h1>
-					<div className="h-1 w-20 bg-blue-500 mx-auto rounded-full"></div>
+					<div className="flex items-center justify-center mb-4">
+						<Layers className="w-10 h-10 text-blue-500 mr-3" />
+						<h1 className="text-4xl font-extrabold text-gray-800 tracking-tight">Label Maker</h1>
+					</div>
+					<div className="h-1 w-24 bg-blue-500 mx-auto rounded-full mt-3 opacity-75"></div>
 				</header>
 
-				<EdaInfo version={extensionConfig.version} />
-
-				<ActionPanel onAction={handleAction} />
-
-				{status && (
-					<div
-						className={`
-            flex items-center gap-3 p-4 rounded-lg shadow-sm
-            ${
-				status.type === 'success'
-					? 'bg-green-50 border border-green-200'
-					: status.type === 'error'
-						? 'bg-red-50 border border-red-200'
-						: 'bg-blue-50 border border-blue-200'
-			}
-          `}
-					>
-						{StatusIcon[status.type]}
-						<span
-							className={`
-              font-medium
-              ${status.type === 'success' ? 'text-green-700' : status.type === 'error' ? 'text-red-700' : 'text-blue-700'}
-            `}
+				{/* 标签切换 */}
+				<div className="flex justify-center space-x-4 mb-6">
+					{[
+						{
+							key: 'edit',
+							icon: Edit,
+							label: '编辑丝印',
+							description: '自定义您的标签设计',
+						},
+						{
+							key: 'preset',
+							icon: Save,
+							label: '预设管理',
+							description: '管理已保存的标签模板',
+						},
+					].map((tab) => (
+						<button
+							key={tab.key}
+							onClick={() => setActiveTab(tab.key as 'edit' | 'preset')}
+							className={`  
+								group relative px-6 py-3 rounded-xl transition-all duration-300   
+								flex items-center space-x-2  
+								${activeTab === tab.key ? 'bg-blue-500 text-white shadow-lg' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50 hover:shadow-md'}  
+						`}
 						>
-							{status.message}
-						</span>
+							<tab.icon className="w-5 h-5" />
+							<div className="flex flex-col items-start">
+								<span className="font-semibold">{tab.label}</span>
+								<span
+									className={`  
+										text-xs 
+                                		${activeTab === tab.key ? 'text-blue-100' : 'text-gray-400'}  
+                            		`}
+								>
+									{tab.description}
+								</span>
+							</div>
+						</button>
+					))}
+				</div>
+
+				{/* 主内容区 */}
+				<div
+					className="  
+						bg-white rounded-2xl shadow-xl overflow-hidden   
+						border border-gray-100   
+						transform transition-all   
+						hover:shadow-2xl  
+					"
+				>
+					{activeTab === 'edit' ? <EditTab initialPreset={currentEditPreset} /> : <PresetTab onEditPreset={handleEditPreset} />}
+				</div>
+
+				{/* 底部信息 */}
+				<footer className="text-center text-gray-500 text-sm">
+					<div className="flex items-center justify-center space-x-2">
+						<span>LabelMaker | 版本 1.0.0</span>
+						<div className="w-0.5 h-4 bg-gray-300 rounded-full"></div>
+						<div className="flex items-center">
+							<span className="mr-1">Crafted with</span>
+							<Heart className="inline-block w-4 h-4 text-red-500 animate-pulse" />
+							<span className="ml-1">by Quarix</span>
+						</div>
 					</div>
-				)}
+				</footer>
 			</div>
 		</div>
 	);
-}
+};
 
 export default App;
