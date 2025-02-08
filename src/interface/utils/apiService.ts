@@ -14,6 +14,8 @@ interface Window {
 	queryLocalFonts: (options: { postscriptNames: string[] }) => Promise<FontData[]>;
 }
 export const placeSilkPrint = async (preset: SilkPrintPreset) => {
+	// Todo 利用canvas绘制丝印转SVG
+
 	if (!preset.text.content) {
 		eda.sys_Message.showToastMessage('丝印内容不能为空', undefined, 2);
 		return;
@@ -26,7 +28,7 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 		const availableFonts = await (window as Window).queryLocalFonts({
 			postscriptNames: ['.PingFangHK-Light'],
 		});
-		// 查找特定字体
+		// 查找特定字体 实验失败
 		const targetFont = availableFonts[0];
 		const fontData = await targetFont.blob();
 		alert('fontData: ');
