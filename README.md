@@ -1,5 +1,11 @@
 [简体中文](#) | [English](./README.en.md) | [繁體中文](./README.zh-Hant.md) | [日本語](./README.ja.md) | [Русский](./README.ru.md)
 
+# LCEDA-Pro-LabelMaker
+
+![pic1](./images/plugin1.png)
+
+![pic2](./images/plugin2.png)
+
 # pro-api-sdk
 
 嘉立创EDA & EasyEDA 专业版扩展 API 开发工具
