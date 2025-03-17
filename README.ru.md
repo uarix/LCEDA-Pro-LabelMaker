@@ -7,3 +7,7 @@
 ![pic2](./images/plugin2.png)
 
 Ссылайтесь на расширение EasyEDA Std: https://github.com/xsrf/easyeda-labelmaker
+
+# Лицензия
+
+Это расширение использует лицензию с открытым исходным кодом [Apache License 2.0] (https://choosealicense.com/licenses/apache-2.0/). Информация о товарных знаках JLCT EDA и EasyEDA используется в описании функций и в заголовке расширения, разработанного для этого инструментария и выпущенного с открытым исходным кодом.
