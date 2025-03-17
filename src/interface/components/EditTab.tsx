@@ -274,7 +274,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 							{preset.leftStructure} {preset.text.content} {preset.rightStructure}
 						</text>
 
-						{/* 添加简单的边框 */}
+						{/* 
 						<path
 							d={`  
 						M 10 20   
@@ -287,6 +287,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 							stroke="gray"
 							strokeDasharray="5,5"
 						/>
+						*/}
 					</svg>
 				</div>
 			)}

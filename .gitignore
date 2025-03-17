@@ -6,4 +6,4 @@
 /node_modules/
 /.eslintcache
 debug.log
-/iframe/
+/iframe/*
