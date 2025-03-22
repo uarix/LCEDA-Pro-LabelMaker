@@ -2,7 +2,7 @@
 	"name": "pcb-label-maker",
 	"version": "0.0.1",
 	"description": "PCB label maker for EasyEDA Pro/嘉立创EDA专业版",
-	"author": "uarix",
+	"author": "Quarix",
 	"license": "Apache-2.0",
 	"homepage": "https://pro.lceda.cn/",
 	"scripts": {
