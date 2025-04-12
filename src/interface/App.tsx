@@ -1,6 +1,7 @@
 import { Edit, Heart, Layers, Save } from 'lucide-react';
 import React, { useState } from 'react';
 
+import * as extensionConfig from '../../extension.json';
 import EditTab from './components/EditTab';
 import PresetTab from './components/PresetTab';
 import type { SilkPrintPreset } from './types/SilkPrintTypes';
@@ -31,14 +32,14 @@ const App: React.FC = () => {
 						{
 							key: 'edit',
 							icon: Edit,
-							label: '编辑丝印',
-							description: '自定义您的标签设计',
+							label: eda.sys_I18n.text('Edit Silkscreen'),
+							description: eda.sys_I18n.text('Customize Your Label Design'),
 						},
 						{
 							key: 'preset',
 							icon: Save,
-							label: '预设管理',
-							description: '管理已保存的标签模板',
+							label: eda.sys_I18n.text('Preset Management'),
+							description: eda.sys_I18n.text('Manage Saved Templates'),
 						},
 					].map((tab) => (
 						<button
@@ -81,7 +82,9 @@ const App: React.FC = () => {
 				{/* 底部信息 */}
 				<footer className="text-center text-gray-500 text-sm">
 					<div className="flex items-center justify-center space-x-2">
-						<span>LabelMaker | 版本 1.0.0</span>
+						<span>
+							LabelMaker | {eda.sys_I18n.text('Version')} {extensionConfig.version}
+						</span>
 						<div className="w-0.5 h-4 bg-gray-300 rounded-full"></div>
 						<div className="flex items-center">
 							<span className="mr-1">Crafted with</span>

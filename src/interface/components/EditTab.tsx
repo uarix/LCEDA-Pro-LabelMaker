@@ -50,8 +50,8 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 				const fonts = await eda.sys_FontManager.getFontsList();
 				setFontOptions(fonts.length > 0 ? fonts : ['Arial']); // 如果获取失败，使用默认值
 			} catch (error) {
-				console.error('获取字体列表失败:', error);
-				eda.sys_Message.showToastMessage('获取字体列表失败', ESYS_ToastMessageType.ERROR, 2);
+				console.error(eda.sys_I18n.text('Failed to Get Font List') + ':', error);
+				eda.sys_Message.showToastMessage(eda.sys_I18n.text('Failed to Get Font List'), ESYS_ToastMessageType.ERROR, 2);
 				setFontOptions(['Arial']);
 			}
 		};
@@ -62,40 +62,54 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 	const handlePlace = async () => {
 		try {
 			await placeSilkPrint(preset);
-			eda.sys_Message.showToastMessage('丝印放置成功', ESYS_ToastMessageType.INFO, 2);
+			eda.sys_Message.showToastMessage(eda.sys_I18n.text('Silkscreen Placed Successfully'), ESYS_ToastMessageType.INFO, 2);
 		} catch (error) {
-			alert('放置失败');
+			eda.sys_Message.showToastMessage(eda.sys_I18n.text('Failed to Place'), ESYS_ToastMessageType.ERROR, 2);
 		}
 	};
 
 	const handleSave = () => {
 		if (!preset.id) {
 			// 没有id，要求用户输入名称
-			const name = prompt('请输入预设名称', preset.text.content || '未命名预设');
+			const name = prompt(eda.sys_I18n.text('Enter Preset Name'), preset.text.content || eda.sys_I18n.text('Unnamed Preset'));
 			if (name) {
 				savePreset({ ...preset, name });
-				eda.sys_Message.showToastMessage(`预设 ${preset.name} 已保存`, ESYS_ToastMessageType.SUCCESS, 2);
+				eda.sys_Message.showToastMessage(eda.sys_I18n.text('Preset Saved', undefined, undefined, name), ESYS_ToastMessageType.SUCCESS, 2);
 			} else {
-				eda.sys_Message.showToastMessage('预设名称不能为空', ESYS_ToastMessageType.ERROR, 2);
+				eda.sys_Message.showToastMessage(eda.sys_I18n.text('Preset Name Cannot Be Empty'), ESYS_ToastMessageType.ERROR, 2);
 			}
 		} else {
-			eda.sys_MessageBox.showConfirmationMessage('是否另存为新预设？', '保存预设', '是', '否，覆盖原预设', async (YesButtonClicked) => {
-				if (YesButtonClicked) {
-					preset.id = '';
-					const name = prompt('请输入预设名称', preset.text.content || '未命名预设');
-					if (name) {
-						preset.name = name;
-						savePreset(preset);
-						eda.sys_Message.showToastMessage(`预设 ${preset.name} 已保存`, ESYS_ToastMessageType.SUCCESS, 2);
+			eda.sys_MessageBox.showConfirmationMessage(
+				eda.sys_I18n.text('Save as New Preset'),
+				eda.sys_I18n.text('Save Preset'),
+				eda.sys_I18n.text('Yes'),
+				eda.sys_I18n.text('No, Overwrite Existing'),
+				async (YesButtonClicked) => {
+					if (YesButtonClicked) {
+						preset.id = '';
+						const name = prompt(eda.sys_I18n.text('Enter Preset Name'), preset.text.content || eda.sys_I18n.text('Unnamed Preset'));
+						if (name) {
+							preset.name = name;
+							savePreset(preset);
+							eda.sys_Message.showToastMessage(
+								eda.sys_I18n.text('Preset Saved', undefined, undefined, preset.name),
+								ESYS_ToastMessageType.SUCCESS,
+								2,
+							);
+						} else {
+							eda.sys_Message.showToastMessage(eda.sys_I18n.text('Preset Name Cannot Be Empty'), ESYS_ToastMessageType.ERROR, 2);
+						}
 					} else {
-						eda.sys_Message.showToastMessage('预设名称不能为空', ESYS_ToastMessageType.ERROR, 2);
+						// 有id，更新预设
+						updatePreset(preset);
+						eda.sys_Message.showToastMessage(
+							eda.sys_I18n.text('Preset Updated', undefined, undefined, preset.name),
+							ESYS_ToastMessageType.INFO,
+							2,
+						);
 					}
-				} else {
-					// 有id，更新预设
-					updatePreset(preset);
-					eda.sys_Message.showToastMessage(`预设 ${preset.name} 已更新`, ESYS_ToastMessageType.INFO, 2);
-				}
-			});
+				},
+			);
 		}
 	};
 
@@ -106,7 +120,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 				<div className="flex-1">
 					<label className="block mb-2 text-sm text-gray-600 flex items-center">
 						<Layers className="mr-2 w-4 h-4 text-blue-500" />
-						左侧结构
+						{eda.sys_I18n.text('Left Structure')}
 					</label>
 					<select
 						value={preset.leftStructure}
@@ -125,7 +139,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 				<div className="flex-2">
 					<label className="block mb-2 text-sm text-gray-600 flex items-center">
 						<Type className="mr-2 w-4 h-4 text-blue-500" />
-						丝印文本
+						{eda.sys_I18n.text('Silkscreen Text')}
 					</label>
 					<input
 						value={preset.text.content}
@@ -135,7 +149,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 								text: { ...preset.text, content: e.target.value },
 							})
 						}
-						placeholder="输入丝印文本"
+						placeholder={eda.sys_I18n.text('Silkscreen Text')}
 						className="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-200 transition"
 					/>
 				</div>
@@ -144,7 +158,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 				<div className="flex-1">
 					<label className="block mb-2 text-sm text-gray-600 flex items-center">
 						<Layers className="mr-2 w-4 h-4 text-blue-500" />
-						右侧结构
+						{eda.sys_I18n.text('Right Structure')}
 					</label>
 					<select
 						value={preset.rightStructure}
@@ -166,10 +180,10 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 					{/* 字体选择 */}
 					<div>
 						<label className="block mb-2 text-sm text-gray-600 flex items-center">
-							字体
+							{eda.sys_I18n.text('Font')}
 							<HelpCircle
 								className="ml-2 w-4 h-4 text-gray-400 cursor-pointer hover:text-blue-500"
-								data-tooltip="由于插件环境限制，请先在 嘉立创EDA 设置 → 常用字体 内添加目标字体"
+								data-tooltip={eda.sys_I18n.text('Font List Notice')}
 								onClick={(e) => {
 									const tooltip = e.currentTarget.getAttribute('data-tooltip') || '';
 									eda.sys_Message.showToastMessage(tooltip, ESYS_ToastMessageType.INFO, 3);
@@ -196,7 +210,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 
 					{/* 字体大小 */}
 					<div>
-						<label className="block mb-2 text-sm text-gray-600">大小</label>
+						<label className="block mb-2 text-sm text-gray-600">{eda.sys_I18n.text('Size')}</label>
 						<input
 							type="range"
 							min="12"
@@ -215,7 +229,7 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 
 					{/* 对齐方式 */}
 					<div>
-						<label className="block mb-2 text-sm text-gray-600">对齐</label>
+						<label className="block mb-2 text-sm text-gray-600">{eda.sys_I18n.text('Alignment')}</label>
 						<div className="flex justify-between">
 							{['left', 'center', 'right'].map((align) => (
 								<button
@@ -249,16 +263,16 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 					className="flex items-center bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition"
 				>
 					<Navigation className="mr-2 w-5 h-5" />
-					放置丝印
+					{eda.sys_I18n.text('Place Silkscreen')}
 				</button>
 				<button onClick={handleSave} className="flex items-center bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
 					<Save className="mr-2 w-5 h-5" />
-					保存预设
+					{eda.sys_I18n.text('Save Preset')}
 				</button>
 			</div>
 			{preset.text.content && (
 				<div className="bg-gray-50 p-4 rounded-lg border border-gray-100">
-					<div className="text-sm text-gray-600 mb-2">预览</div>
+					<div className="text-sm text-gray-600 mb-2">{eda.sys_I18n.text('Preview')}</div>
 					<svg width="100%" height="100" xmlns="http://www.w3.org/2000/svg" className="border rounded">
 						<text
 							x="50%"
@@ -273,21 +287,6 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 						>
 							{preset.leftStructure} {preset.text.content} {preset.rightStructure}
 						</text>
-
-						{/* 
-						<path
-							d={`  
-						M 10 20   
-						L ${window.innerWidth * 0.9} 20   
-						L ${window.innerWidth * 0.9} 80   
-						L 10 80   
-						Z  
-						`}
-							fill="none"
-							stroke="gray"
-							strokeDasharray="5,5"
-						/>
-						*/}
 					</svg>
 				</div>
 			)}

@@ -2,5 +2,37 @@
 	"Create Label": "创建丝印标签",
 	"About": "关于",
 	"About Content": "为你的PCB创建独特的反向丝印标签\nCoding with ❤ by Quarix",
-	"About Version": "Label Maker插件版本 v${1}"
+	"About Version": "Label Maker插件版本 v${1}",
+
+	"Edit Silkscreen": "编辑丝印",
+	"Customize Your Label Design": "自定义您的标签设计",
+	"Preset Management": "预设管理",
+	"Manage Saved Templates": "管理已保存的标签模板",
+	"Version": "版本",
+
+	"Left Structure": "左侧结构",
+	"Silkscreen Text": "丝印文本",
+	"Right Structure": "右侧结构",
+	"Font": "字体",
+	"Size": "大小",
+	"Alignment": "对齐",
+	"Place Silkscreen": "放置丝印",
+	"Save Preset": "保存预设",
+	"Preview": "预览",
+
+	"Search Presets": "搜索预设",
+	"No Presets": "暂无预设",
+	"Place": "放置",
+	"Save as New Preset": "是否另存为新预设？",
+	"Yes": "是",
+	"No, Overwrite Existing": "否，覆盖原预设",
+	"Enter Preset Name": "请输入预设名称",
+	"Unnamed Preset": "未命名预设",
+	"Preset Name Cannot Be Empty": "预设名称不能为空",
+	"Preset Saved": "预设 ${1} 已保存",
+	"Preset Updated": "预设 ${1} 已更新",
+	"Silkscreen Placed Successfully": "丝印放置成功",
+	"Failed to Place": "放置失败",
+	"Failed to Get Font List": "获取字体列表失败",
+	"Font List Notice": "由于插件环境限制，请先在嘉立创EDA设置→常用字体内添加目标字体"
 }

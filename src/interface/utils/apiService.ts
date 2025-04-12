@@ -7,7 +7,7 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 	const canvas = document.createElement('canvas');
 	const ctx = canvas.getContext('2d');
 	if (!ctx) {
-		console.error('不支持Canvas上下文');
+		console.error(eda.sys_I18n.text('Failed to Place'));
 		return;
 	}
 
@@ -141,7 +141,7 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 		default:
 			textX = sideWidth + paddingLeft;
 			console.log('preset.text.alignment', preset.text.alignment);
-			console.error('未知文本对齐方式');
+			console.error(eda.sys_I18n.text('Failed to Place'));
 	}
 
 	// 绘制白色文字
@@ -167,12 +167,12 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 					false,
 				);
 				if (!polygon_img) {
-					console.error('无法转换为复杂多边形');
+					console.error(eda.sys_I18n.text('Failed to Place'));
 					return;
 				}
 				eda.pcb_PrimitiveImage.create(0, 0, polygon_img, EPCB_LayerId.TOP_SILKSCREEN);
 			} else {
-				console.error('无法创建Blob对象');
+				console.error(eda.sys_I18n.text('Failed to Place'));
 			}
 		},
 		'image/png',

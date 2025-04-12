@@ -5,6 +5,15 @@ import type { SilkPrintPreset } from '../types/SilkPrintTypes';
 import { deletePreset, getPresets, placeSilkPrint } from '../utils/apiService';
 import PresetItem from './PresetItem';
 
+// 立创eda的bug，iframe内无法使用系统的ESYS_ToastMessageType，所以手动重新定义一个
+enum ESYS_ToastMessageType {
+	ASK = 'question',
+	ERROR = 'error',
+	INFO = 'info',
+	SUCCESS = 'success',
+	WARNING = 'warn',
+}
+
 const PresetTab: React.FC<{ onEditPreset: (preset: SilkPrintPreset) => void }> = ({ onEditPreset }) => {
 	const [presets, setPresets] = useState<SilkPrintPreset[]>([]);
 	const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
@@ -22,9 +31,9 @@ const PresetTab: React.FC<{ onEditPreset: (preset: SilkPrintPreset) => void }> =
 	const handlePlace = async (preset: SilkPrintPreset) => {
 		try {
 			await placeSilkPrint(preset);
-			alert('丝印放置成功');
+			eda.sys_Message.showToastMessage(eda.sys_I18n.text('Silkscreen Placed Successfully'), ESYS_ToastMessageType.INFO, 2);
 		} catch (error) {
-			alert('放置失败');
+			eda.sys_Message.showToastMessage(eda.sys_I18n.text('Failed to Place'), ESYS_ToastMessageType.ERROR, 2);
 		}
 	};
 
@@ -37,7 +46,7 @@ const PresetTab: React.FC<{ onEditPreset: (preset: SilkPrintPreset) => void }> =
 					<div className="relative flex-1">
 						<input
 							type="text"
-							placeholder="搜索预设..."
+							placeholder={eda.sys_I18n.text('Search Presets')}
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 							className="pl-8 pr-4 py-2 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -71,7 +80,7 @@ const PresetTab: React.FC<{ onEditPreset: (preset: SilkPrintPreset) => void }> =
 
 			{filteredPresets.length === 0 ? (
 				<div className="text-center text-gray-500 py-10">
-					<p>暂无预设</p>
+					<p>{eda.sys_I18n.text('No Presets')}</p>
 				</div>
 			) : (
 				<div

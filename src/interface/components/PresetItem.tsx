@@ -1,4 +1,4 @@
-import { Edit3, LayoutGrid, Trash2 } from 'lucide-react';
+import { Edit3, Trash2 } from 'lucide-react';
 import React from 'react';
 
 import type { SilkPrintPreset } from '../types/SilkPrintTypes';
@@ -28,7 +28,7 @@ const PresetItem: React.FC<PresetItemProps> = ({ preset, viewMode, onDelete, onE
 					<p className="text-sm text-gray-500 line-clamp-2">{preset.text.content}</p>
 				</div>
 				<button onClick={onPlace} className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
-					放置预设
+					{eda.sys_I18n.text('Place')}
 				</button>
 			</div>
 		);
@@ -48,7 +48,7 @@ const PresetItem: React.FC<PresetItemProps> = ({ preset, viewMode, onDelete, onE
 					<Edit3 className="w-5 h-5" />
 				</button>
 				<button onClick={onPlace} className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition">
-					放置
+					{eda.sys_I18n.text('Place')}
 				</button>
 			</div>
 		</div>

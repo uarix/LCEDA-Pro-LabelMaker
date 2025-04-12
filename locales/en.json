@@ -2,5 +2,37 @@
 	"Create Label": "Create Label",
 	"About": "About",
 	"About Content": "Create unique reverse silkscreen labels for your PCB\nCoding with ❤ by Quarix",
-	"About Version": "Label Maker Plugin Version v${1}"
+	"About Version": "Label Maker Plugin Version v${1}",
+
+	"Edit Silkscreen": "Edit Silkscreen",
+	"Customize Your Label Design": "Customize Your Label Design",
+	"Preset Management": "Preset Management",
+	"Manage Saved Templates": "Manage Saved Templates",
+	"Version": "Version",
+
+	"Left Structure": "Left Structure",
+	"Silkscreen Text": "Silkscreen Text",
+	"Right Structure": "Right Structure",
+	"Font": "Font",
+	"Size": "Size",
+	"Alignment": "Alignment",
+	"Place Silkscreen": "Place Silkscreen",
+	"Save Preset": "Save Preset",
+	"Preview": "Preview",
+
+	"Search Presets": "Search Presets",
+	"No Presets": "No Presets",
+	"Place": "Place",
+	"Save as New Preset": "Save as New Preset",
+	"Yes": "Yes",
+	"No, Overwrite Existing": "No, Overwrite Existing",
+	"Enter Preset Name": "Enter Preset Name",
+	"Unnamed Preset": "Unnamed Preset",
+	"Preset Name Cannot Be Empty": "Preset Name Cannot Be Empty",
+	"Preset Saved": "Preset ${1} Saved",
+	"Preset Updated": "Preset ${1} Updated",
+	"Silkscreen Placed Successfully": "Silkscreen Placed Successfully",
+	"Failed to Place": "Failed to Place",
+	"Failed to Get Font List": "Failed to Get Font List",
+	"Font List Notice": "Due to plugin environment limitations, please add target fonts in LCEDA Settings → Common Fonts first"
 }
