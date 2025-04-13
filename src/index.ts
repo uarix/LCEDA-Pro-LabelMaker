@@ -25,5 +25,6 @@ export function about(): void {
 }
 
 export function create_label(): void {
+	// eda.sys_IFrame.openIFrame('/iframe/index.html', 540, undefined, 'label_maker_window');
 	eda.sys_IFrame.openIFrame('/iframe/index.html', 540, 787, 'label_maker_window');
 }
