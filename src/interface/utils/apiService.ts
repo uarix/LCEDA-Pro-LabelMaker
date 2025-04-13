@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import type { SilkPrintPreset } from '../types/SilkPrintTypes';
 
+// Function to place silk print
 export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 	// 高分辨率画布
 	const canvas = document.createElement('canvas');
@@ -187,6 +188,50 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 	document.body.removeChild(link);
 };
 
+// Function to get all available fonts
+export const getAllAvailableFonts = async (): Promise<string[]> => {
+	const fonts: string[] = [];
+
+	// 获取系统字体
+	if ('queryLocalFonts' in window) {
+		try {
+			const systemFonts = await window.queryLocalFonts({
+				postscriptNames: [],
+			});
+			fonts.push(...systemFonts.map((font) => font.fullName));
+		} catch (err) {
+			console.warn('Failed to get system fonts:', err);
+		}
+	}
+	// 去重并返回
+	return [...new Set(fonts)];
+};
+
+// Function to get font data
+export const getFontData = async (fontFamily: string): Promise<ArrayBuffer | null> => {
+	try {
+		// 首先尝试从系统字体获取
+		if ('queryLocalFonts' in window) {
+			const availableFonts = await window.queryLocalFonts({
+				postscriptNames: [fontFamily],
+			});
+
+			if (availableFonts.length > 0) {
+				const fontBlob = await availableFonts[0].blob();
+				return await fontBlob.arrayBuffer();
+			}
+		}
+
+		// If the method doesn't exist, you need to implement it or handle the error
+		console.warn('getFontData method is not implemented in eda.sys_FontManager');
+		return null;
+	} catch (err) {
+		console.warn('Failed to get font data:', err);
+		return null;
+	}
+};
+
+// Function to save a preset
 export const savePreset = (preset: SilkPrintPreset) => {
 	const presets = JSON.parse(localStorage.getItem('Plugin_LabelMaker_SilkPrintPresets') || '[]');
 	// preset.id = Date.now().toString();
@@ -198,15 +243,18 @@ export const savePreset = (preset: SilkPrintPreset) => {
 	return preset;
 };
 
+// Function to get all presets
 export const getPresets = (): SilkPrintPreset[] => {
 	return JSON.parse(localStorage.getItem('Plugin_LabelMaker_SilkPrintPresets') || '[]');
 };
 
+// Function to delete a preset
 export const deletePreset = (id: string) => {
 	const presets = getPresets().filter((p) => p.id !== id);
 	localStorage.setItem('Plugin_LabelMaker_SilkPrintPresets', JSON.stringify(presets));
 };
 
+// Function to update a preset
 export const updatePreset = (updatedPreset: SilkPrintPreset) => {
 	const presets = getPresets().map((p) => (p.id === updatedPreset.id ? updatedPreset : p));
 	localStorage.setItem('Plugin_LabelMaker_SilkPrintPresets', JSON.stringify(presets));

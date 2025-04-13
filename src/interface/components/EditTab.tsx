@@ -12,6 +12,7 @@ enum ESYS_ToastMessageType {
 	SUCCESS = 'success',
 	WARNING = 'warn',
 }
+
 // 结构选项
 const STRUCTURE_OPTIONS = [
 	{ value: '<', label: '<' },
@@ -23,8 +24,25 @@ const STRUCTURE_OPTIONS = [
 	{ value: ')', label: ')' },
 ];
 
+// 修改 FontData 接口定义
+interface FontData {
+	family: string;
+	fullName: string;
+	postscriptName: string;
+	style: string;
+	blob: () => Promise<Blob>;
+}
+
+// 修改 Window 接口定义
+declare global {
+	interface Window {
+		queryLocalFonts: (options?: { postscriptNames?: string[] }) => Promise<FontData[]>;
+	}
+}
+
 const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initialPreset }) => {
 	const [fontOptions, setFontOptions] = useState<string[]>(['Arial']);
+	const [localFonts, setLocalFonts] = useState<FontData[]>([]);
 	const [preset, setPreset] = useState<SilkPrintPreset>({
 		id: initialPreset?.id || '',
 		name: initialPreset?.name || '',
@@ -47,12 +65,25 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 	useEffect(() => {
 		const fetchFonts = async () => {
 			try {
-				const fonts = await eda.sys_FontManager.getFontsList();
-				setFontOptions(fonts.length > 0 ? fonts : ['Arial']); // 如果获取失败，使用默认值
-			} catch (error) {
-				console.error(eda.sys_I18n.text('Failed to Get Font List') + ':', error);
-				eda.sys_Message.showToastMessage(eda.sys_I18n.text('Failed to Get Font List'), ESYS_ToastMessageType.ERROR, 2);
-				setFontOptions(['Arial']);
+				// First try to get fonts from EDA
+				const edaFonts = await eda.sys_FontManager.getFontsList();
+
+				// Then try to get local fonts if supported
+				let systemFonts: FontData[] = [];
+				if (window.queryLocalFonts) {
+					try {
+						systemFonts = await window.queryLocalFonts();
+					} catch (err) {
+						console.warn('Failed to query local fonts:', err);
+					}
+				}
+
+				// Combine and deduplicate fonts
+				const allFonts = [...new Set([...edaFonts, ...systemFonts.map((f) => f.fullName)])];
+				setFontOptions(allFonts);
+				setLocalFonts(systemFonts);
+			} catch (err) {
+				console.error('Failed to fetch fonts:', err);
 			}
 		};
 
