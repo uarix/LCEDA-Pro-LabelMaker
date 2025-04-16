@@ -100,15 +100,17 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 	};
 
 	const handleSave = () => {
+		const silkscreenText = preset.text.content.trim();
+		if (!silkscreenText) {
+			eda.sys_Message.showToastMessage(eda.sys_I18n.text('Silkscreen Text Cannot Be Empty'), ESYS_ToastMessageType.ERROR, 2);
+			return;
+		}
+
 		if (!preset.id) {
-			// 没有id，要求用户输入名称
-			const name = prompt(eda.sys_I18n.text('Enter Preset Name'), preset.text.content || eda.sys_I18n.text('Unnamed Preset'));
-			if (name) {
-				savePreset({ ...preset, name });
-				eda.sys_Message.showToastMessage(eda.sys_I18n.text('Preset Saved', undefined, undefined, name), ESYS_ToastMessageType.SUCCESS, 2);
-			} else {
-				eda.sys_Message.showToastMessage(eda.sys_I18n.text('Preset Name Cannot Be Empty'), ESYS_ToastMessageType.ERROR, 2);
-			}
+			// Automatically set the preset name to the silkscreen text
+			const updatedPreset = { ...preset, name: silkscreenText, text: { ...preset.text, content: silkscreenText } };
+			savePreset(updatedPreset);
+			eda.sys_Message.showToastMessage(eda.sys_I18n.text('Preset Saved', undefined, undefined, silkscreenText), ESYS_ToastMessageType.SUCCESS, 2);
 		} else {
 			eda.sys_MessageBox.showConfirmationMessage(
 				eda.sys_I18n.text('Save as New Preset'),
@@ -118,23 +120,20 @@ const EditTab: React.FC<{ initialPreset?: SilkPrintPreset | null }> = ({ initial
 				async (YesButtonClicked) => {
 					if (YesButtonClicked) {
 						preset.id = '';
-						const name = prompt(eda.sys_I18n.text('Enter Preset Name'), preset.text.content || eda.sys_I18n.text('Unnamed Preset'));
-						if (name) {
-							preset.name = name;
-							savePreset(preset);
-							eda.sys_Message.showToastMessage(
-								eda.sys_I18n.text('Preset Saved', undefined, undefined, preset.name),
-								ESYS_ToastMessageType.SUCCESS,
-								2,
-							);
-						} else {
-							eda.sys_Message.showToastMessage(eda.sys_I18n.text('Preset Name Cannot Be Empty'), ESYS_ToastMessageType.ERROR, 2);
-						}
-					} else {
-						// 有id，更新预设
-						updatePreset(preset);
+						// Automatically set the preset name to the silkscreen text
+						const updatedPreset = { ...preset, name: silkscreenText, text: { ...preset.text, content: silkscreenText } };
+						savePreset(updatedPreset);
 						eda.sys_Message.showToastMessage(
-							eda.sys_I18n.text('Preset Updated', undefined, undefined, preset.name),
+							eda.sys_I18n.text('Preset Saved', undefined, undefined, updatedPreset.name),
+							ESYS_ToastMessageType.SUCCESS,
+							2,
+						);
+					} else {
+						// Update the silkscreen text to the preset name before updating
+						const updatedPreset = { ...preset, text: { ...preset.text, content: preset.name } };
+						updatePreset(updatedPreset);
+						eda.sys_Message.showToastMessage(
+							eda.sys_I18n.text('Preset Updated', undefined, undefined, updatedPreset.name),
 							ESYS_ToastMessageType.INFO,
 							2,
 						);
