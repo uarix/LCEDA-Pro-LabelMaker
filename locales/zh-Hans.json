@@ -1,7 +1,7 @@
 {
 	"Create Label": "创建丝印标签",
 	"About": "关于",
-	"About Content": "为你的PCB创建独特的反向丝印标签\nCoding with ❤ by Quarix",
+	"About Content": "为你的PCB创建独特的反向丝印标签\n由Quarix及社区用❤编写\n本插件是开源的，可在GitHub上获取:\nhttps://github.com/uarix/LCEDA-Pro-LabelMaker \n如果你喜欢此插件，请考虑支持其开发:\nhttps://github.com/sponsors/uarix",
 	"About Version": "Label Maker插件版本 v${1}",
 
 	"Edit Silkscreen": "编辑丝印",

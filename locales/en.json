@@ -1,7 +1,7 @@
 {
 	"Create Label": "Create Label",
 	"About": "About",
-	"About Content": "Create unique reverse silkscreen labels for your PCB\nCoding with ❤ by Quarix",
+	"About Content": "Create unique reverse silkscreen labels for your PCB\nCoding with ❤ by Quarix and the community\nThis plugin is open-source and available on GitHub:\nhttps://github.com/uarix/LCEDA-Pro-LabelMaker \nIf you like this plugin, please consider supporting its development:\nhttps://github.com/sponsors/uarix",
 	"About Version": "Label Maker Plugin Version v${1}",
 
 	"Edit Silkscreen": "Edit Silkscreen",
