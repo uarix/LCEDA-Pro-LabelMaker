@@ -1,4 +1,21 @@
 {
-	"projectName": "LCEDA-Pro-LabelMaker",
-	"projectOwner": "Quarix"
+  "projectName": "LCEDA-Pro-LabelMaker",
+  "projectOwner": "uarix",
+  "files": [
+    "README.md"
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular",
+  "contributorsPerLine": 7,
+  "contributors": [
+    {
+      "login": "mayjack0312",
+      "name": "LMY",
+      "avatar_url": "https://avatars.githubusercontent.com/u/102800660?v=4",
+      "profile": "https://github.com/mayjack0312",
+      "contributions": [
+        "code"
+      ]
+    }
+  ]
 }
