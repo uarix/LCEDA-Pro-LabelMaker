@@ -151,8 +151,6 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 	ctx.textBaseline = 'middle';
 	ctx.fillText(preset.text.content, textX, labelHeight / 2);
 
-	// 导出为PNG并下载
-	const dataUrl = canvas.toDataURL('image/png');
 	canvas.toBlob(
 		async (blob) => {
 			if (blob) {
@@ -179,13 +177,13 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 		'image/png',
 		1.0,
 	);
-	// 下载图片预览看看
-	const link = document.createElement('a');
-	link.download = `${preset.name || 'label'}-${preset.id}.png`;
-	link.href = dataUrl;
-	document.body.appendChild(link);
-	link.click();
-	document.body.removeChild(link);
+	// const dataUrl = canvas.toDataURL('image/png');
+	// const link = document.createElement('a');
+	// link.download = `${preset.name || 'label'}-${preset.id}.png`;
+	// link.href = dataUrl;
+	// document.body.appendChild(link);
+	// link.click();
+	// document.body.removeChild(link);
 };
 
 // Function to get all available fonts
