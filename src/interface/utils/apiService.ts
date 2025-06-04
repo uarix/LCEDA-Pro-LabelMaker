@@ -163,7 +163,7 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 					0.7,
 					0.7,
 					0.2,
-					false,
+					true,
 				);
 				if (!polygon_img) {
 					console.error(eda.sys_I18n.text('Failed to Place'));
