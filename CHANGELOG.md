@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/uarix/LCEDA-Pro-LabelMaker/compare/v1.0.1...v1.0.2) (2025-06-08)
+
+### Bug Fixes
+
+-   EPCB_LayerId 枚举定义 ([ff6f843](https://github.com/uarix/LCEDA-Pro-LabelMaker/commit/ff6f8432edb61aecfd1ec827e0c306f684f5d5a1))
+
 ## 1.0.0 (2025-06-08)
 
 ### Features
