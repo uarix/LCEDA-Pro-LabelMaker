@@ -55,7 +55,7 @@
 			"@semantic-release/git",
 			{
 				"assets": ["CHANGELOG.md", "extension.json", "package.json"],
-				"message": ":construction_worker:chore: release ${nextRelease.version} [skip ci]"
+				"message": "chore: release ${nextRelease.version} [skip ci]"
 			}
 		],
 		[
@@ -67,7 +67,7 @@
 		[
 			"@semantic-release/github",
 			{
-				"releaseName": "✨ ${nextRelease.version}",
+				"releaseName": "${nextRelease.version}",
 				"assets": [
 					{
 						"path": "build/dist/*.eext",
