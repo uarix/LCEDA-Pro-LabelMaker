@@ -1,3 +1,9 @@
+## [1.0.3](https://github.com/uarix/LCEDA-Pro-LabelMaker/compare/v1.0.2...v1.0.3) (2025-06-08)
+
+### Bug Fixes
+
+-   曲线绘制算法 ([5c960bf](https://github.com/uarix/LCEDA-Pro-LabelMaker/commit/5c960bf7a3b5380bbddd5347f7c17e473557a1c9))
+
 ## [1.0.2](https://github.com/uarix/LCEDA-Pro-LabelMaker/compare/v1.0.1...v1.0.2) (2025-06-08)
 
 ### Bug Fixes
