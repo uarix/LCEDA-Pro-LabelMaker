@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import type { SilkPrintPreset } from '../types/SilkPrintTypes';
 
 // 立创EDA SDK BUG, ReferenceError: EPCB_LayerId is not defined
-declare enum EPCB_LayerId {
+enum EPCB_LayerId {
 	/** 顶层 */
 	TOP = 1,
 	/** 顶层丝印层 */

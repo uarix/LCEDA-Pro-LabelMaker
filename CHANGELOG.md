@@ -1,9 +1,3 @@
-## [1.0.1](https://github.com/uarix/LCEDA-Pro-LabelMaker/compare/v1.0.0...v1.0.1) (2025-06-08)
-
-### Bug Fixes
-
--   添加 EPCB_LayerId 枚举以修复 SDK 错误 ([1651e7a](https://github.com/uarix/LCEDA-Pro-LabelMaker/commit/1651e7a36bd5e958bdcc21f1be0ddec059edc438))
-
 ## 1.0.0 (2025-06-08)
 
 ### Features
