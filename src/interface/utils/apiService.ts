@@ -195,14 +195,10 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 		return;
 	}
 
-	// 设置高分辨率
 	const scale = 4;
-
-	// 默认内边距
 	const paddingTop = 15;
 	const paddingLeft = 20;
 
-	// 配置字体并测量文本
 	ctx.font = `${preset.text.fontSize}px ${preset.text.fontFamily}`;
 	const textMetrics = ctx.measureText(preset.text.content);
 	const textWidth = textMetrics.width;
@@ -246,20 +242,15 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 			ctx.moveTo(0, 0);
 			ctx.lineTo(sideWidth, labelHeight);
 			break;
-		case '|':
-			ctx.moveTo(0, 0);
-			ctx.lineTo(0, labelHeight);
-			break;
 		case '(':
 			ctx.moveTo(sideWidth, 0);
-			ctx.arcTo(0, 0, 0, labelHeight / 2, labelHeight / 2);
-			ctx.arcTo(0, labelHeight, sideWidth, labelHeight, labelHeight / 2);
+			ctx.quadraticCurveTo(0, labelHeight / 2, sideWidth, labelHeight);
 			break;
 		case ')':
 			ctx.moveTo(0, 0);
-			ctx.arcTo(sideWidth, 0, sideWidth, labelHeight / 2, labelHeight / 2);
-			ctx.arcTo(sideWidth, labelHeight, 0, labelHeight, labelHeight / 2);
+			ctx.quadraticCurveTo(sideWidth * 1.5, labelHeight / 2, 0, labelHeight);
 			break;
+		case '|':
 		default:
 			ctx.moveTo(0, 0);
 			ctx.lineTo(0, labelHeight);
@@ -281,26 +272,22 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 			ctx.lineTo(labelWidth, 0);
 			break;
 		case '\\':
-			ctx.lineTo(labelWidth, 0);
-			break;
-		case '/':
+			ctx.lineTo(labelWidth, labelHeight);
 			ctx.lineTo(labelWidth - sideWidth, 0);
 			break;
-		case '|':
-			ctx.lineTo(labelWidth, labelHeight);
+		case '/':
 			ctx.lineTo(labelWidth, 0);
 			break;
 		case ')':
-			ctx.arcTo(labelWidth, labelHeight, labelWidth, labelHeight / 2, labelHeight / 2);
-			ctx.arcTo(labelWidth, 0, labelWidth - sideWidth, 0, labelHeight / 2);
+			ctx.quadraticCurveTo(labelWidth, labelHeight / 2, labelWidth - sideWidth, 0);
 			break;
 		case '(':
-			ctx.arcTo(labelWidth - sideWidth, labelHeight, labelWidth - sideWidth, labelHeight / 2, labelHeight / 2);
-			ctx.arcTo(labelWidth - sideWidth, 0, labelWidth, 0, labelHeight / 2);
-			break;
-		default:
 			ctx.lineTo(labelWidth, labelHeight);
-			ctx.lineTo(labelWidth, 0);
+			ctx.quadraticCurveTo(labelWidth - sideWidth * 1.5, labelHeight / 2, labelWidth, 0);
+			break;
+		case '|':
+		default:
+			ctx.lineTo(labelWidth - sideWidth, 0);
 			break;
 	}
 
@@ -325,7 +312,6 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 		default:
 			textX = sideWidth + paddingLeft;
 			console.log('preset.text.alignment', preset.text.alignment);
-			console.error(eda.sys_I18n.text('Failed to Place'));
 	}
 
 	// 绘制白色文字
@@ -359,6 +345,11 @@ export const placeSilkPrint = async (preset: SilkPrintPreset) => {
 		},
 		'image/png',
 		1.0,
+	);
+	const dataUrl = canvas.toDataURL('image/png');
+	console.log(
+		'%c ',
+		`font-size:1px; padding:${canvas.height / 4}px ${canvas.width / 4}px; background:url(${dataUrl}) no-repeat; background-size:contain;`,
 	);
 };
 
