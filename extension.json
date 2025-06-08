@@ -2,9 +2,9 @@
 	"name": "pcb-label-maker",
 	"uuid": "c698ae03503a4c4589337df549524f1e",
 	"displayName": "Label Maker",
-	"description": "为你的PCB创建独特的反向丝印标签，支持保存配置",
-	"version": "0.0.3",
-	"publisher": "Quarix <HiQuarix@Gmail.com>",
+	"description": "为PCB创建独特的反向丝印标签，支持保存配置",
+	"version": "0.0.0",
+	"publisher": "Quarix",
 	"engines": {
 		"eda": "^2.2.32"
 	},
@@ -14,9 +14,9 @@
 		"url": ""
 	},
 	"categories": "Other",
-	"keywords": ["PCB","label"],
+	"keywords": ["PCB", "label"],
 	"images": {
-		"logo": "./images/logo.png"
+		"logo": "./docs/images/logo.png"
 	},
 	"homepage": "https://github.com/uarix/LCEDA-Pro-LabelMaker",
 	"bugs": "https://github.com/uarix/LCEDA-Pro-LabelMaker/issues",
