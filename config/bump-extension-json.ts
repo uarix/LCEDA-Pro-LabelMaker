@@ -34,3 +34,14 @@ pkgData.version = version;
 
 fs.writeFileSync(pkgPath, JSON.stringify(pkgData, null, 2) + '\n');
 console.log(`package.json bumped to version ${version}`);
+
+// bump package-lock.json
+const pkgLockPath = path.join(__dirname, '../package-lock.json');
+const pkgLockContent = fs.readFileSync(pkgLockPath, 'utf8');
+const pkgLockData = JSON.parse(pkgLockContent);
+
+pkgLockData.version = version;
+pkgLockData[''].version = version;
+
+fs.writeFileSync(pkgLockPath, JSON.stringify(pkgLockData, null, 2) + '\n');
+console.log(`package-lock.json bumped to version ${version}`);
