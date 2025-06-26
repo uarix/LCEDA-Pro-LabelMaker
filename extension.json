@@ -3,14 +3,21 @@
 	"uuid": "c698ae03503a4c4589337df549524f1e",
 	"displayName": "Label Maker",
 	"description": "为PCB创建独特的反向丝印标签，支持保存配置",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"publisher": "Quarix",
-	"engines": { "eda": "^2.2.32" },
+	"engines": {
+		"eda": "^2.2.32"
+	},
 	"license": "Apache 2.0",
-	"repository": { "type": "extension-store", "url": "" },
+	"repository": {
+		"type": "extension-store",
+		"url": ""
+	},
 	"categories": "Other",
 	"keywords": ["PCB", "label"],
-	"images": { "logo": "./images/logo.png" },
+	"images": {
+		"logo": "./images/logo.png"
+	},
 	"homepage": "https://github.com/uarix/LCEDA-Pro-LabelMaker",
 	"bugs": "https://github.com/uarix/LCEDA-Pro-LabelMaker/issues",
 	"activationEvents": {},
@@ -22,8 +29,16 @@
 				"id": "label_maker",
 				"title": "Label Maker",
 				"menuItems": [
-					{ "id": "create_label", "title": "Create Label", "registerFn": "create_label" },
-					{ "id": "about", "title": "About", "registerFn": "about" }
+					{
+						"id": "create_label",
+						"title": "Create Label",
+						"registerFn": "create_label"
+					},
+					{
+						"id": "about",
+						"title": "About",
+						"registerFn": "about"
+					}
 				]
 			}
 		]
