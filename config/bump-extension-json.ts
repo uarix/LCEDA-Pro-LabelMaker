@@ -41,7 +41,7 @@ const pkgLockContent = fs.readFileSync(pkgLockPath, 'utf8');
 const pkgLockData = JSON.parse(pkgLockContent);
 
 pkgLockData.version = version;
-pkgLockData[''].version = version;
+pkgLockData.packages[''].version = version;
 
 fs.writeFileSync(pkgLockPath, JSON.stringify(pkgLockData, null, 2) + '\n');
 console.log(`package-lock.json bumped to version ${version}`);
