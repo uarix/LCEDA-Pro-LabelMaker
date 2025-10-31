@@ -8,7 +8,7 @@ A silk screen editor plugin for [EasyEDA Pro](https://lceda.cn/), featuring mode
 
 ## 项目简介
 
-**LCEDA-Pro-LabelMaker** 是为嘉立创EDA专业版设计的丝印生成插件，使用 React 技术栈，核心功能参考并改进了 [嘉立创EDA 标准版插件](https://github.com/xsrf/easyeda-labelmaker)。
+**LCEDA-Pro-LabelMaker** 是为嘉立创EDA专业版设计的丝印生成插件，使用 React 技术栈。
 
 ---
 
@@ -22,7 +22,7 @@ A silk screen editor plugin for [EasyEDA Pro](https://lceda.cn/), featuring mode
 ## 安装方式
 
 1. 访问 [Releases 页面](../../releases) 下载最新版插件 (`.eext` 文件)
-2. 在 立创EDA 专业版 打开「插件管理」，加载下载的 `.eext` 文件
+2. 在 嘉立创EDA 专业版 打开「V2.2在 设置 - 扩展 - 插件管理，V3在 高级 - 扩展管理器」，加载下载的 `.eext` 文件
 
 ---
 
@@ -30,6 +30,9 @@ A silk screen editor plugin for [EasyEDA Pro](https://lceda.cn/), featuring mode
 
 -   打开 PCB 项目，在 顶栏 选择 LabelMaker
 -   按需调整标签内容，完成设计后点击放置，丝印将应用到 PCB 页面
+
+![](images/operate.gif)
+
 
 ---
 
@@ -66,5 +69,5 @@ A silk screen editor plugin for [EasyEDA Pro](https://lceda.cn/), featuring mode
 -   Issues 或建议请通过 [GitHub Issues](../../issues) 反馈
 -   社区交流：见项目 Discussions 区
 
-![Plugin Screenshot 1](./docs/images/plugin1.png)
-![Plugin Screenshot 2](./docs/images/plugin2.png)
+![Plugin Screenshot 1](docs/images/plugin1.png)
+![Plugin Screenshot 2](docs/images/plugin2.png)
