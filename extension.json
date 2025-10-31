@@ -3,7 +3,7 @@
 	"uuid": "c698ae03503a4c4589337df549524f1e",
 	"displayName": "Label Maker",
 	"description": "为PCB创建独特的反向丝印标签，支持保存配置",
-	"version": "1.0.4",
+	"version": "1.0.0",
 	"publisher": "Quarix",
 	"engines": {
 		"eda": "^2.2.32"
