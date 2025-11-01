@@ -1,3 +1,9 @@
+## [1.0.5](https://github.com/uarix/LCEDA-Pro-LabelMaker/compare/v1.0.4...v1.0.5) (2025-11-01)
+
+### Bug Fixes
+
+- 修正readm的图片在扩展广场不显示的问题，添加了gif动图 ([50980e9](https://github.com/uarix/LCEDA-Pro-LabelMaker/commit/50980e922703e940a1e7ec5ae15d6e54cb750a81))
+
 ## 1.0.0 (2025-10-31)
 
 ### Features
