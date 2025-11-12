@@ -3,7 +3,6 @@
 /.vscode/
 /.github/
 /archive/
-/docs/
 /build/
 /config/
 /coverage/
